@@ -111,3 +111,15 @@ resource "aws_security_group_rule" "backend_alb_vpn" {
   source_security_group_id = module.vpn.sg_id
   security_group_id = module.backend_alb.sg_id
 }
+
+module "vpn" {
+    #source = "../../terraform-aws-securitygroup"
+    source = "git::https://github.com/manojyoti434/terraform-aws-securitygroup.git?ref=main"
+    project = var.project
+    environment = var.environment
+
+    sg_name = "vpn"
+    sg_description = "for vpn"
+    vpc_id = local.vpc_id
+}
+
